@@ -4,12 +4,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-class BoardTest {
+class NumbersTest {
 
     @Test
     void generate_board() {
-        Board board = new Board(new RandomShuffle());
+        Numbers numbers = new Numbers(new RandomOrder());
 
-        assertThat(board.getBlocks()).hasSize(15);
+        assertThat(numbers.getValues()).hasSize(16);
     }
 }
