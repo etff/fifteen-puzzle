@@ -4,9 +4,9 @@ public class OrderChecker {
     private static final int MAX_SIZE = 4;
     public static boolean isAscend(int[][] positions) {
         int count = 1;
-        for (int i = 0; i < MAX_SIZE; i++) {
-            for (int j = 0; j < MAX_SIZE; j++) {
-                if (positions[i][j] != count && !isLastPosition(i, j)) {
+        for (int row = 0; row < MAX_SIZE; row++) {
+            for (int col = 0; col < MAX_SIZE; col++) {
+                if (positions[row][col] != count && !isLastPosition(row, col)) {
                     return false;
                 }
                 count++;
@@ -15,7 +15,7 @@ public class OrderChecker {
         return true;
     }
 
-    private static boolean isLastPosition(int i, int j) {
-        return i == MAX_SIZE - 1 && j == MAX_SIZE - 1;
+    private static boolean isLastPosition(int row, int col) {
+        return row == MAX_SIZE - 1 && col == MAX_SIZE - 1;
     }
 }
