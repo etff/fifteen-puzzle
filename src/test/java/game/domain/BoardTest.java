@@ -29,3 +29,4 @@ class BoardTest {
         assertThat(board.getMoves()).isEqualTo(1);
     }
 }
+
