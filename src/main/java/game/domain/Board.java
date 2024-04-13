@@ -1,25 +1,29 @@
 package game.domain;
 
+import java.util.Arrays;
+
 public class Board {
-    private static final int MAX_SIZE = 4;
     private static final int POINTER = 0;
+    private static final int MAX_SIZE = 4;
     private static final String INVALID_INPUT = "입력이 잘못되었습니다, 명령(h, j, k, l, q)";
-    private int[][] positions = new int[MAX_SIZE][MAX_SIZE];
-    private int row = -1;
-    private int col = -1;
+    private final Positions positions;
+    private final OrderChecker orderChecker;
+    private int pointerRow = -1;
+    private int pointerCol = -1;
     private int moves = 0;
 
     public Board(Numbers numbers) {
-        initPositions(numbers);
+        positions = new Positions(numbers);
+        orderChecker = new OrderChecker();
+        initPointer();
     }
 
-    private void initPositions(Numbers numbers) {
-        for (int row = 0, index = 0; row < MAX_SIZE; row++) {
-            for (int col = 0; col < MAX_SIZE; col++, index++) {
-                positions[row][col] = numbers.getBlock(index);
-                if (isPointer(row, col)) {
-                    this.row = row;
-                    this.col = col;
+    private void initPointer() {
+        for (int row = 0; row < MAX_SIZE; row++) {
+            for (int col = 0; col < MAX_SIZE; col++) {
+                if (positions.get(row, col) == POINTER) {
+                    this.pointerRow = row;
+                    this.pointerCol = col;
                 }
             }
         }
@@ -29,30 +33,22 @@ public class Board {
         Directions directions = Directions.from(input);
         if (directions == null) {
             System.out.println(INVALID_INPUT);
+            return;
         }
 
-        int newRow = directions.moveRow(row);
-        int newCol = directions.moveCol(col);
+        int newRow = directions.moveRow(pointerRow);
+        int newCol = directions.moveCol(pointerCol);
 
-        if (underMaxPositions(newRow, newCol)) {
-            positions[row][col] = positions[newRow][newCol];
-            positions[newRow][newCol] = 0;
-            row = newRow;
-            col = newCol;
-            this.moves++;
+        if (positions.isInBounds(newRow, newCol)) {
+            positions.swapPositions(pointerRow, pointerCol, newRow, newCol);
+            pointerRow = newRow;
+            pointerCol = newCol;
+            moves++;
         }
-    }
-
-    private boolean underMaxPositions(int newRow, int newCol) {
-        return newRow >= 0 && newRow < MAX_SIZE && newCol >= 0 && newCol < MAX_SIZE;
-    }
-
-    private boolean isPointer(int row, int col) {
-        return positions[row][col] == POINTER;
     }
 
     public int[][] getPositions() {
-        return positions;
+        return Arrays.copyOf(positions.getPositions(), positions.getLength());
     }
 
     public int getMoves() {
@@ -60,6 +56,7 @@ public class Board {
     }
 
     public boolean isSolved() {
-        return OrderChecker.isAscend(positions);
+        return orderChecker.isAscend(positions.getPositions());
     }
+
 }
