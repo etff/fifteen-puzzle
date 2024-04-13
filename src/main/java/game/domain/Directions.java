@@ -28,8 +28,8 @@ public enum Directions {
                 .orElse(null);
     }
 
-    private static boolean hasDirection(String input, Directions it) {
-        return Objects.equals(it.wasdKey, input) || Objects.equals(it.vimKey, input);
+    private static boolean hasDirection(String input, Directions directions) {
+        return Objects.equals(directions.wasdKey, input) || Objects.equals(directions.vimKey, input);
     }
 
     public int moveRow(int row) {

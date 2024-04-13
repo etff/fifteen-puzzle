@@ -3,30 +3,16 @@ package game.domain;
 import java.util.Arrays;
 
 public class Board {
-    private static final int POINTER = 0;
-    private static final int MAX_SIZE = 4;
     private static final String INVALID_INPUT = "입력이 잘못되었습니다, 명령(h, j, k, l, q)";
     private final Positions positions;
     private final OrderChecker orderChecker;
-    private int pointerRow = -1;
-    private int pointerCol = -1;
+    private Pointer pointer;
     private int moves = 0;
 
     public Board(Numbers numbers) {
         positions = new Positions(numbers);
         orderChecker = new OrderChecker();
-        initPointer();
-    }
-
-    private void initPointer() {
-        for (int row = 0; row < MAX_SIZE; row++) {
-            for (int col = 0; col < MAX_SIZE; col++) {
-                if (positions.get(row, col) == POINTER) {
-                    this.pointerRow = row;
-                    this.pointerCol = col;
-                }
-            }
-        }
+        pointer = Pointer.from(positions);
     }
 
     public void move(String input) {
@@ -36,13 +22,12 @@ public class Board {
             return;
         }
 
-        int newRow = directions.moveRow(pointerRow);
-        int newCol = directions.moveCol(pointerCol);
+        int newRow = directions.moveRow(pointer.row());
+        int newCol = directions.moveCol(pointer.col());
 
         if (positions.isInBounds(newRow, newCol)) {
-            positions.swapPositions(pointerRow, pointerCol, newRow, newCol);
-            pointerRow = newRow;
-            pointerCol = newCol;
+            positions.swapPositions(pointer.row(), pointer.col(), newRow, newCol);
+            pointer = pointer.move(newRow, newCol);
             moves++;
         }
     }
@@ -58,5 +43,4 @@ public class Board {
     public boolean isSolved() {
         return orderChecker.isAscend(positions.getPositions());
     }
-
 }
