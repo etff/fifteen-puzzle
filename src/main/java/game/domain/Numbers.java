@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Numbers {
+    public static final int MAX_NUMBER = 15;
     private final List<Integer> values;
 
     public Numbers(OrderStrategy orderStrategy) {
@@ -13,16 +14,12 @@ public class Numbers {
     }
 
     private List<Integer> generateNumbers() {
-        return IntStream.rangeClosed(0, 15).boxed()
+        return IntStream.rangeClosed(0, MAX_NUMBER).boxed()
                 .collect(Collectors.toList());
     }
 
     public List<Integer> getValues() {
         return Collections.unmodifiableList(values);
-    }
-
-    public int size() {
-        return values.size();
     }
 
     public int getBlock(int index) {

@@ -32,11 +32,11 @@ public enum Directions {
         return Objects.equals(directions.wasdKey, input) || Objects.equals(directions.vimKey, input);
     }
 
-    public int moveRow(int row) {
-        return row + this.row;
+    public int moveRow(Pointer pointer) {
+        return pointer.row() + this.row;
     }
 
-    public int moveCol(int col) {
-        return col + this.col;
+    public int moveCol(Pointer pointer) {
+        return pointer.col() + this.col;
     }
 }

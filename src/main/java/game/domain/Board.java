@@ -21,15 +21,12 @@ public class Board {
             System.out.println(INVALID_INPUT);
             return;
         }
+        int newRow = directions.moveRow(pointer);
+        int newCol = directions.moveCol(pointer);
 
-        int newRow = directions.moveRow(pointer.row());
-        int newCol = directions.moveCol(pointer.col());
-
-        if (positions.isInBounds(newRow, newCol)) {
-            positions.swapPositions(pointer.row(), pointer.col(), newRow, newCol);
-            pointer = pointer.move(newRow, newCol);
-            moves++;
-        }
+        positions.swapPositions(pointer, newRow, newCol);
+        pointer = pointer.move(newRow, newCol);
+        moves++;
     }
 
     public int[][] getPositions() {

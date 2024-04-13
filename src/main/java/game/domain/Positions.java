@@ -25,16 +25,12 @@ public class Positions {
         positions[row][col] = value;
     }
 
-    public boolean isInBounds(int row, int col) {
-        return row >= 0 && row < MAX_SIZE && col >= 0 && col < MAX_SIZE;
-    }
-
     public int[][] getPositions() {
         return positions;
     }
 
-    public void swapPositions(int row, int col, int newRow, int newCol) {
-        movePosition(row, col, this.get(newRow, newCol));
+    public void swapPositions(Pointer pointer, int newRow, int newCol) {
+        movePosition(pointer.row(), pointer.col(), this.get(newRow, newCol));
         movePosition(newRow, newCol, POINTER);
     }
 
