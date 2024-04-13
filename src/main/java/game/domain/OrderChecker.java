@@ -2,7 +2,7 @@ package game.domain;
 
 public class OrderChecker {
     private static final int MAX_SIZE = 4;
-    public static boolean isAscend(int[][] positions) {
+    public boolean isAscend(int[][] positions) {
         int count = 1;
         for (int row = 0; row < MAX_SIZE; row++) {
             for (int col = 0; col < MAX_SIZE; col++) {
@@ -15,7 +15,7 @@ public class OrderChecker {
         return true;
     }
 
-    private static boolean isLastPosition(int row, int col) {
+    private boolean isLastPosition(int row, int col) {
         return row == MAX_SIZE - 1 && col == MAX_SIZE - 1;
     }
 }
