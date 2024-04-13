@@ -25,7 +25,7 @@ public class FifteenPuzzle {
                 outputView.printGameEnd();
                 break;
             }
-            board.move(input);
+            board.movePointer(input);
             outputView.printBoard(board);
             if (board.isSolved()) {
                 outputView.printResult(board);

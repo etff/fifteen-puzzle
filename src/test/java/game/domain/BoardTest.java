@@ -24,7 +24,7 @@ class BoardTest {
         Board board = new Board(new Numbers(new FifteenPuzzleOrder()));
         String leftCommand = "k";
 
-        board.move(leftCommand);
+        board.movePointer(leftCommand);
 
         assertThat(board.getMoves()).isEqualTo(1);
     }
