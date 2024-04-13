@@ -7,7 +7,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 class NumbersTest {
 
     @Test
-    void generate_board() {
+    void generate_numbers() {
         Numbers numbers = new Numbers(new RandomOrder());
 
         assertThat(numbers.getValues()).hasSize(16);

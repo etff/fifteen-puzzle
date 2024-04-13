@@ -13,12 +13,12 @@ public class OutputView {
 
     public void printBoard(Board board) {
         int[][] positions = board.getPositions();
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
-                if (positions[i][j] == POINTER) {
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
+                if (positions[row][col] == POINTER) {
                     System.out.print(SPACES);
                 } else {
-                    System.out.printf(NUMBER, positions[i][j]);
+                    System.out.printf(NUMBER, positions[row][col]);
                 }
             }
             System.out.println();

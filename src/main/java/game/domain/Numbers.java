@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Numbers {
-    public static final int MAX_NUMBER = 15;
+    private static final int MAX_NUMBER = 15;
     private final List<Integer> values;
 
     public Numbers(OrderStrategy orderStrategy) {

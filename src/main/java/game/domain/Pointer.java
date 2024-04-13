@@ -3,7 +3,7 @@ package game.domain;
 public record Pointer(int row, int col) {
     private static final int POINTER = 0;
     private static final int MAX_SIZE = 4;
-    public static final int NOT_FOUND = -1;
+    private static final int NOT_FOUND = -1;
 
     public static Pointer from(Positions positions) {
         for (int row = 0; row < MAX_SIZE; row++) {
