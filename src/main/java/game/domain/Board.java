@@ -60,19 +60,6 @@ public class Board {
     }
 
     public boolean isSolved() {
-        int count = 1;
-        for (int i = 0; i < MAX_SIZE; i++) {
-            for (int j = 0; j < MAX_SIZE; j++) {
-                if (positions[i][j] != count && !isLastPosition(i, j)) {
-                    return false;
-                }
-                count = (count % (MAX_SIZE * MAX_SIZE - 1)) + 1;
-            }
-        }
-        return true;
-    }
-
-    private boolean isLastPosition(int i, int j) {
-        return i == MAX_SIZE - 1 && j == MAX_SIZE - 1;
+        return OrderChecker.isAscend(positions);
     }
 }

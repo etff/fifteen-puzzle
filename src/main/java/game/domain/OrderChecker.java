@@ -1,12 +1,21 @@
 package game.domain;
 
-import java.util.List;
-import java.util.stream.IntStream;
-
 public class OrderChecker {
-    public static boolean isAscending(List<Integer> numbers) {
-        return IntStream.range(0, numbers.size() - 1)
-                .filter(it -> it != 0)
-                .noneMatch(i -> numbers.get(i) > numbers.get(i + 1));
+    private static final int MAX_SIZE = 4;
+    public static boolean isAscend(int[][] positions) {
+        int count = 1;
+        for (int i = 0; i < MAX_SIZE; i++) {
+            for (int j = 0; j < MAX_SIZE; j++) {
+                if (positions[i][j] != count && !isLastPosition(i, j)) {
+                    return false;
+                }
+                count++;
+            }
+        }
+        return true;
+    }
+
+    private static boolean isLastPosition(int i, int j) {
+        return i == MAX_SIZE - 1 && j == MAX_SIZE - 1;
     }
 }
