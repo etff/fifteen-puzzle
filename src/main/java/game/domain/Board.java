@@ -7,12 +7,13 @@ public class Board {
     private final Positions positions;
     private final OrderChecker orderChecker;
     private Pointer pointer;
-    private int moves = 0;
+    private Moves moves;
 
     public Board(Numbers numbers) {
-        positions = new Positions(numbers);
-        orderChecker = new OrderChecker();
-        pointer = Pointer.from(positions);
+        this.positions = new Positions(numbers);
+        this.orderChecker = new OrderChecker();
+        this.pointer = Pointer.from(positions);
+        this.moves = new Moves();
     }
 
     public void move(String input) {
@@ -26,7 +27,7 @@ public class Board {
 
         positions.swapPositions(pointer, newRow, newCol);
         pointer = pointer.move(newRow, newCol);
-        moves++;
+        moves = moves.increase();
     }
 
     public int[][] getPositions() {
@@ -34,7 +35,7 @@ public class Board {
     }
 
     public int getMoves() {
-        return moves;
+        return moves.getMoves();
     }
 
     public boolean isSolved() {
