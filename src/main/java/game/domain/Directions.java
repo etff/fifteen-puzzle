@@ -9,6 +9,7 @@ public enum Directions {
     UP("k", "w", -1, 0),
     DOWN("j", "s", 1, 0);
 
+    private static final String NOT_FOUND_DIRECTION = "해당하는 방향을 찾지 못했습니다.";
     private final String vimKey;
     private final String wasdKey;
     private final int row;
@@ -25,7 +26,7 @@ public enum Directions {
         return Arrays.stream(Directions.values())
                 .filter(it -> hasDirection(input, it))
                 .findFirst()
-                .orElse(null);
+                .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_DIRECTION));
     }
 
     private static boolean hasDirection(String input, Directions directions) {

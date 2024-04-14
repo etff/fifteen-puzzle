@@ -1,10 +1,12 @@
 package game.domain;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 
 class DirectionsTest {
 
@@ -42,9 +44,16 @@ class DirectionsTest {
 
     @ParameterizedTest
     @NullAndEmptySource
-    void invalid_input(String input) {
-        Directions actual = Directions.from(input);
+    void create_with_empty_input(String input) {
+        assertThatCode(() -> Directions.from(input))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 
-        assertThat(actual).isNull();
+    @Test
+    void create_with_not_valid_input() {
+        String input = "b";
+
+        assertThatCode(() -> Directions.from(input))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
