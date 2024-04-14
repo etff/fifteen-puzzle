@@ -25,11 +25,10 @@ public class Board {
             System.out.println(INVALID_INPUT);
             return;
         }
-        int newRow = directions.moveRow(pointer);
-        int newCol = directions.moveCol(pointer);
+        Pointer swapPointer = directions.applyDirection(pointer);
 
-        positions.swapPositions(pointer, newRow, newCol);
-        pointer = pointer.move(newRow, newCol);
+        positions.swapPositions(pointer, swapPointer);
+        pointer = swapPointer;
         moves = moves.increase();
     }
 

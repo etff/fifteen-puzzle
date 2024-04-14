@@ -39,4 +39,8 @@ public enum Directions {
     public int moveCol(Pointer pointer) {
         return pointer.col() + this.col;
     }
+
+    public Pointer applyDirection(Pointer pointer) {
+        return new Pointer(pointer.row() + this.row, pointer.col() + this.col);
+    }
 }

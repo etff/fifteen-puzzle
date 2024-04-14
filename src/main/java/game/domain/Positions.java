@@ -29,12 +29,12 @@ public class Positions {
         return positions;
     }
 
-    public void swapPositions(Pointer pointer, int newRow, int newCol) {
-        movePosition(pointer.row(), pointer.col(), this.get(newRow, newCol));
-        movePosition(newRow, newCol, POINTER);
-    }
-
     public int getLength() {
         return positions.length;
+    }
+
+    public void swapPositions(Pointer pointer, Pointer swapPointer) {
+        movePosition(pointer.row(), pointer.col(), this.get(swapPointer.row(), swapPointer.col()));
+        movePosition(swapPointer.row(), swapPointer.col(), POINTER);
     }
 }

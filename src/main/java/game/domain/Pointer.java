@@ -27,4 +27,8 @@ public record Pointer(int row, int col) {
     public Pointer move(int newRow, int newCol) {
         return new Pointer(newRow, newCol);
     }
+
+    public Pointer move(Pointer swapPointer) {
+        return null;
+    }
 }
