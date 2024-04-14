@@ -21,10 +21,6 @@ public class Board {
      * @param directions 입력방향
      */
     public void movePointer(Directions directions) {
-        if (directions == null) {
-            System.out.println(INVALID_INPUT);
-            return;
-        }
         Pointer swapPointer = directions.applyDirection(pointer);
         if (swapPointer.isValidPosition()) {
             positions.swapPositions(pointer, swapPointer);
