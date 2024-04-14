@@ -20,12 +20,12 @@ public class FifteenPuzzle {
         }
 
         while (true) {
-            String input = inputView.askDirection();
+            String input = inputView.askCommand();
             if (input.equals(QUIT_COMMAND)) {
                 outputView.printGameEnd();
                 break;
             }
-            board.movePointer(input);
+            board.movePointer(Directions.from(input));
             outputView.printBoard(board);
             if (board.isSolved()) {
                 outputView.printResult(board);

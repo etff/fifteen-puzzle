@@ -18,10 +18,9 @@ public class Board {
 
     /**
      * 입력한 방향으로 포인터를 이동한다.
-     * @param input 입력방향
+     * @param directions 입력방향
      */
-    public void movePointer(String input) {
-        Directions directions = Directions.from(input);
+    public void movePointer(Directions directions) {
         if (directions == null) {
             System.out.println(INVALID_INPUT);
             return;
