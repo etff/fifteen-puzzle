@@ -3,7 +3,6 @@ package game.domain;
 import java.util.Arrays;
 
 public class Board {
-    private static final String INVALID_INPUT = "입력이 잘못되었습니다, 명령(h, j, k, l, q)";
     private final Positions positions;
     private final OrderChecker orderChecker;
     private Pointer pointer;
