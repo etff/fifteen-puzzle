@@ -26,10 +26,11 @@ public class Board {
             return;
         }
         Pointer swapPointer = directions.applyDirection(pointer);
-
-        positions.swapPositions(pointer, swapPointer);
-        pointer = swapPointer;
-        moves = moves.increase();
+        if (swapPointer.isValidPosition()) {
+            positions.swapPositions(pointer, swapPointer);
+            pointer = swapPointer;
+            moves = moves.increase();
+        }
     }
 
     public int[][] getPositions() {

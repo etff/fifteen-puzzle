@@ -28,7 +28,7 @@ public record Pointer(int row, int col) {
         return new Pointer(newRow, newCol);
     }
 
-    public Pointer move(Pointer swapPointer) {
-        return null;
+    public boolean isValidPosition() {
+        return row >= 0 && row < MAX_SIZE && col >= 0 && col < MAX_SIZE;
     }
 }

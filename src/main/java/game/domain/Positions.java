@@ -12,7 +12,7 @@ public class Positions {
     private void initPositions(Numbers numbers) {
         for (int row = 0, index = 0; row < MAX_SIZE; row++) {
             for (int col = 0; col < MAX_SIZE; col++, index++) {
-                positions[row][col] = numbers.getBlock(index);
+                positions[row][col] = numbers.getNumber(index);
             }
         }
     }
@@ -36,5 +36,6 @@ public class Positions {
     public void swapPositions(Pointer pointer, Pointer swapPointer) {
         movePosition(pointer.row(), pointer.col(), this.get(swapPointer.row(), swapPointer.col()));
         movePosition(swapPointer.row(), swapPointer.col(), POINTER);
+
     }
 }
