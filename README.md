@@ -1,8 +1,4 @@
 숫자 퍼즐 만들기
-목표
-15 퍼즐 (아래 위키 참조) 을 구현한다.
-
-https://en.wikipedia.org/wiki/15_puzzle
 
 요구사항
 시작시 자동 셔플
