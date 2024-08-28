@@ -6,7 +6,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 class PointerTest {
-
     @Test
     void change_row() {
         Pointer pointer = new Pointer(1, 1);

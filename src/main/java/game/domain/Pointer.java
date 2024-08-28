@@ -1,19 +1,8 @@
 package game.domain;
 
 public record Pointer(int row, int col) {
-    private static final int POINTER = 0;
-    private static final int MAX_SIZE = 4;
-    private static final int NOT_FOUND = -1;
-
-    public static Pointer from(Positions positions) {
-        for (int row = 0; row < MAX_SIZE; row++) {
-            for (int col = 0; col < MAX_SIZE; col++) {
-                if (positions.get(row, col) == POINTER) {
-                    return new Pointer(row, col);
-                }
-            }
-        }
-        return new Pointer(NOT_FOUND, NOT_FOUND);
+    public static Pointer notFound() {
+        return new Pointer(-1, -1);
     }
 
     public Pointer changeRow(int row) {
@@ -28,7 +17,7 @@ public record Pointer(int row, int col) {
         return new Pointer(newRow, newCol);
     }
 
-    public boolean isValidPosition() {
-        return row >= 0 && row < MAX_SIZE && col >= 0 && col < MAX_SIZE;
+    public Pointer plus(int deltaRow, int deltaCol) {
+        return new Pointer(row + deltaRow, col + deltaCol);
     }
 }
