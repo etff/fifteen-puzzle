@@ -1,26 +1,14 @@
 package game.domain;
 
-public class OrderChecker {
-    private static final int MAX_SIZE = 4;
+import java.util.List;
 
-    public boolean isAscend(int[][] positions) {
-        int count = 1;
-        for (int row = 0; row < MAX_SIZE; row++) {
-            for (int col = 0; col < MAX_SIZE; col++) {
-                if (isMatchWithCount(positions[row][col], count) && !isLastPosition(row, col)) {
-                    return false;
-                }
-                count++;
+public class OrderChecker {
+    public boolean isAscend(List<Integer> values) {
+        for (int i = 0; i < values.size() - 1; i += 1) {
+            if (values.get(i) != i + 1) {
+                return false;
             }
         }
         return true;
-    }
-
-    private boolean isLastPosition(int row, int col) {
-        return row == MAX_SIZE - 1 && col == MAX_SIZE - 1;
-    }
-
-    private boolean isMatchWithCount(int value, int count) {
-        return value != count;
     }
 }

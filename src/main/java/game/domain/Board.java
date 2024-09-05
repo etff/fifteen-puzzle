@@ -1,42 +1,75 @@
 package game.domain;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Board {
-    private final Positions positions;
-    private final OrderChecker orderChecker;
-    private Pointer pointer;
-    private Moves moves;
+    private static final int BLANK = 0;
 
-    public Board(Numbers numbers) {
-        this.positions = new Positions(numbers);
-        this.orderChecker = new OrderChecker();
-        this.pointer = Pointer.from(positions);
-        this.moves = new Moves();
-    }
+    private final int width;
+    private final int height;
+    private final List<Integer> values = new ArrayList<>();
 
-    /**
-     * 입력한 방향으로 포인터를 이동한다.
-     * @param directions 입력방향
-     */
-    public void movePointer(Directions directions) {
-        Pointer swapPointer = directions.applyDirection(pointer);
-        if (swapPointer.isValidPosition()) {
-            positions.swapPositions(pointer, swapPointer);
-            pointer = swapPointer;
-            moves = moves.increase();
+    public Board(int width, int height, Numbers numbers) {
+        this.width = width;
+        this.height = height;
+
+        for (int i = 0; i < width * height; i += 1) {
+            this.values.add(numbers.getNumber(i));
         }
     }
 
-    public int[][] getPositions() {
-        return Arrays.copyOf(positions.getPositions(), positions.getLength());
+    public void swap(Pointer pointer1, Pointer pointer2) {
+        int value1 = get(pointer1);
+        int value2 = get(pointer2);
+
+        set(pointer1, value2);
+        set(pointer2, value1);
     }
 
-    public int getMoves() {
-        return moves.getMoves();
+    public int width() {
+        return width;
     }
 
-    public boolean isSolved() {
-        return orderChecker.isAscend(positions.getPositions());
+    public int height() {
+        return height;
+    }
+
+    public boolean inRectangle(Pointer pointer) {
+        int row = pointer.row();
+        int col = pointer.col();
+        return row >= 0 && row < height() && col >= 0 && col < width();
+    }
+
+    public boolean isSolved(OrderChecker orderChecker) {
+        return orderChecker.isAscend(values);
+    }
+
+    public boolean isBlank(int row, int col) {
+        return get(row, col) == BLANK;
+    }
+
+    public int get(Pointer pointer) {
+        return get(pointer.row(), pointer.col());
+    }
+
+    public int get(int row, int col) {
+        return values.get(row * width + col);
+    }
+
+    private void set(Pointer pointer, int value) {
+        int row = pointer.row();
+        int col = pointer.col();
+        values.set(row * width + col, value);
+    }
+
+    public Pointer findBlankPointer() {
+        int index = values.indexOf(BLANK);
+        if (index < 0) {
+            return Pointer.notFound();
+        }
+        int row = index / width;
+        int col = index % width;
+        return new Pointer(row, col);
     }
 }
